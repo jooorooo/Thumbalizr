@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'api_key'			=>	"8uj9dfecdZr8INiPMr0BW4fJZZf51w", //put your api key here
+	'api_key'			=>	"", //put your api key here
 	'service_url'		=>	"http://api.thumbalizr.com/", // don't change, if you didn't have a special service contract
 	'use_local_cache'	=>	TRUE, // TRUE or FALSE for local image cache
 	'local_cache_dir'	=>	public_path()."/thumbs", //relative cache directory must exists in install directory and rwx permissions to all (777)
