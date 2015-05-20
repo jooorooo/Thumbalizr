@@ -1,0 +1,23 @@
+{
+    "name": "simexis/thumbalizr",
+    "description": "",
+    "authors": [
+        {
+            "name": "Georgi Nachev",
+            "email": "jooorooo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Simexis\\Thumbalizr\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
