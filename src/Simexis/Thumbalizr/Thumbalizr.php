@@ -15,11 +15,11 @@ class Thumbalizr {
 
 
 	public function getRequestUrl($url, $config = array()) {
-		$config = array_merge($this->config->get('thumbalizr::defaults'), $config);
+		$config = array_merge($this->config->get('thumbalizr.defaults'), $config);
 
 		$request_url=
-			$this->config->get('thumbalizr::service_url')."?".
-				"api_key=".$this->config->get('thumbalizr::api_key')."&".
+			$this->config->get('thumbalizr.service_url')."?".
+				"api_key=".$this->config->get('thumbalizr.api_key')."&".
 				"quality=".$config['quality']."&".
 				"width=".$config['width']."&".
 				"encoding=".$config['encoding']."&".
@@ -33,7 +33,7 @@ class Thumbalizr {
 	}
 
 	public function getCacheFileName($url, $config = array()) {
-		$config = array_merge($this->config->get('thumbalizr::defaults'), $config);
+		$config = array_merge($this->config->get('thumbalizr.defaults'), $config);
 
 		$local_cache_file=
 			md5($url)."_".
@@ -44,7 +44,7 @@ class Thumbalizr {
 			$config['width'].".".
 			$config['encoding'];
 
-		$local_cache_subdir = $this->config->get('thumbalizr::local_cache_dir')."/".substr(md5($url),0,2);
+		$local_cache_subdir = $this->config->get('thumbalizr.local_cache_dir')."/".substr(md5($url),0,2);
 
 		return $local_cache_subdir."/".$local_cache_file;
 	}
@@ -60,7 +60,7 @@ class Thumbalizr {
 
 		if (file_exists($cache_filename)) {
 			$filetime = filemtime($cache_filename);
-			$cachetime = time()-$filetime-($this->config->get('thumbalizr::local_cache_expire')*60*60);
+			$cachetime = time()-$filetime-($this->config->get('thumbalizr.local_cache_expire')*60*60);
 		} else {
 			$cachetime = -1;
 		}
@@ -85,7 +85,7 @@ class Thumbalizr {
 	}
 
 	private function save($image, $filename) {
-		if ($image && $this->config->get('thumbalizr::use_local_cache')===TRUE) {
+		if ($image && $this->config->get('thumbalizr.use_local_cache')===TRUE) {
 			$dirname = dirname($filename);
 			// echo "[ $dirname ]";
 			if (!file_exists($dirname)) {

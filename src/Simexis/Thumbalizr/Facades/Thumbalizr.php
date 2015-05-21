@@ -8,6 +8,6 @@ class Thumbalizr extends Facade {
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'thumbalizr'; }
+    protected static function getFacadeAccessor() { return '\Simexis\Thumbalizr\Thumbalizr'; }
 
 }

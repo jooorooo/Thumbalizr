@@ -19,8 +19,13 @@ class ThumbalizrServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->publishes([
-            __DIR__.'/../config/thumbalizr.php' => config_path('thumbalizr.php'),
+            __DIR__.'/../../config/thumbalizr.php' => config_path('thumbalizr.php'),
         ], 'config');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../../config/thumbalizr.php', 'thumbalizr'
+        );
+
 	}
 
 	/**
