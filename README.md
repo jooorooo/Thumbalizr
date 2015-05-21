@@ -7,8 +7,7 @@ Uses API from thumbalizr.com
 
 ## Requirements
 
-* Laravel 4.X / 5.X
-* illuminate/html package if you use Laravel5.X
+* Laravel 5.X
 * php 5.4+
 
 ## Installation
