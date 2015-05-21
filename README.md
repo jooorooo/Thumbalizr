@@ -65,7 +65,6 @@ $cfg = [
 		'bheight'			=>		"1024" // browser height only for mode=screen
    	]
 ];
-echo Grids::make($cfg);
 ```
 
 #### Basic example
