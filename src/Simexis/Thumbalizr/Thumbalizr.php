@@ -44,14 +44,16 @@ class Thumbalizr {
 			$config['width'].".".
 			$config['encoding'];
 
-		$local_cache_subdir = $this->config->get('thumbalizr.local_cache_dir')."/".substr(md5($url),0,2);
-
-		return $local_cache_subdir."/".$local_cache_file;
+		return $this->getCacheDir() . $local_cache_file;
 	}
 
 	public function getPublicFileName($cache_filename) {
 		return str_replace(public_path(), '', $cache_filename);
 	}
+
+    public function getCacheDir() {
+        return rtrim($this->config->get('thumbalizr.local_cache_dir'), '/') . "/";
+    }
 
 	public function getThumbSrc($url, $config = array()) {
 		$request_url = $this->getRequestUrl($url, $config);
@@ -73,13 +75,10 @@ class Thumbalizr {
 		 			$tmp1=explode('X-Thumbalizr-',$tmp); $tmp2=explode(': ',$tmp1[1]); $headers[$tmp2[0]]=$tmp2[1];
 		 		}
 			}
-			if ($headers['Status']=="OK") {
-				$this->save($image, $cache_filename);
-				return $this->getPublicFileName($cache_filename);
-			}
-		}
-		else {
-			return $this->getPublicFileName($cache_filename);
+			if ($headers['Status']=="OK" && $this->save($image, $cache_filename))
+				return $cache_filename;
+		} else {
+			return $cache_filename;
 		}
 		return null;
 	}
@@ -87,15 +86,14 @@ class Thumbalizr {
 	private function save($image, $filename) {
 		if ($image && $this->config->get('thumbalizr.use_local_cache')===TRUE) {
 			$dirname = dirname($filename);
-			// echo "[ $dirname ]";
 			if (!file_exists($dirname)) {
 				mkdir($dirname, 0777, true);
 			}
 
-	 		$fp=fopen($filename,'w');
-	 		fwrite($fp, $image);
-	 		fclose($fp);
+            if(@file_put_contents($filename, $image))
+                return true;
 		}
+        return false;
 	}
 
 
